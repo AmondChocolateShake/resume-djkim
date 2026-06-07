@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DongJu Kim — Full-Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --ink-soft: #444;
+    --ink-muted: #888;
+    --accent: #1a56db;
+    --accent-light: #e8effd;
+    --rule: #e0e0e0;
+    --bg: #fafaf8;
+    --white: #ffffff;
+    --tag-bg: #f0f0ee;
+    --green: #1a7a4a;
+    --green-bg: #edf7f1;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 48px auto;
+    background: var(--white);
+    padding: 56px 64px;
+    box-shadow: 0 2px 32px rgba(0,0,0,0.07);
+  }
+
+  /* HEADER */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: start;
+    padding-bottom: 28px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 32px;
+  }
+
+  .name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .title {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .contact-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .contact-line a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .contact-line a:hover { text-decoration: underline; }
+
+  .remote-badge {
+    background: var(--green-bg);
+    color: var(--green);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid #b7e4cb;
+    white-space: nowrap;
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+
+  /* SUMMARY */
+  .summary {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    margin-bottom: 32px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  .summary strong {
+    color: var(--accent);
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .skill-group {}
+  .skill-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .tag {
+    background: var(--tag-bg);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-weight: 400;
+  }
+
+  .tag.primary {
+    background: var(--accent);
+    color: white;
+    font-weight: 500;
+  }
+
+  /* EXPERIENCE */
+  .job {
+    margin-bottom: 28px;
+  }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2px;
+  }
+
+  .job-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .job-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    white-space: nowrap;
+  }
+
+  .job-company {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+
+  .job-company span {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-left: 6px;
+  }
+
+  .job-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 14px;
+  }
+
+  /* ACHIEVEMENTS */
+  .achievements {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .achievement {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--bg);
+    border-radius: 6px;
+    border: 1px solid var(--rule);
+  }
+
+  .achievement-icon {
+    font-size: 18px;
+    line-height: 1;
+    padding-top: 1px;
+  }
+
+  .achievement-content {}
+  .achievement-title {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .achievement-detail {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  .metric {
+    font-weight: 600;
+    color: var(--green);
+  }
+
+  /* PROJECTS */
+  .project {
+    margin-bottom: 24px;
+    padding: 18px 20px;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    position: relative;
+  }
+
+  .project-live {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--green-bg);
+    color: var(--green);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid #b7e4cb;
+  }
+
+  .project-header {
+    margin-bottom: 8px;
+    padding-right: 70px;
+  }
+
+  .project-name {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .project-url {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .project-url:hover { text-decoration: underline; }
+
+  .project-subtitle {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+
+  .project-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  .project-bullets li {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.55;
+  }
+
+  .project-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 11px;
+    top: 1px;
+  }
+
+  .takeaway {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--accent-light);
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: white; font-size: 12px; }
+    .page { margin: 0; padding: 40px 48px; box-shadow: none; max-width: 100%; }
+    .project-live { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .tag.primary { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+
+  @media (max-width: 700px) {
+    .page { padding: 32px 24px; margin: 0; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .header { grid-template-columns: 1fr; }
+    .name { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div>
+      <div class="name">DongJu Kim</div>
+      <div class="title">Full-Stack Developer · Laravel · Vue · Next.js</div>
+      <div class="contact-line">
+        <span>📍 Korea — open to remote worldwide</span>
+        <a href="mailto:dongju230130@gmail.com">dongju230130@gmail.com</a>
+        <a href="https://github.com" target="_blank">GitHub ↗</a>
+        <a href="https://linkedin.com" target="_blank">LinkedIn ↗</a>
+        <a href="http://lasagnakorea.co.kr" target="_blank">lasagnakorea.co.kr ↗</a>
+      </div>
+    </div>
+    <div class="remote-badge">✓ Available Remote</div>
+  </header>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    Full-stack developer with <strong>3 years of production experience</strong> building and scaling web systems. Delivered measurable results: cut support tickets by <strong>68%</strong>, optimized queries from 28s → under 1s, automated workflows saving <strong>90%+ operational overhead</strong>. Currently operating a <strong>live SaaS product</strong> with real users. Specialized in Laravel/Vue and Next.js ecosystems — ships fast, debugs independently, and owns the full stack from DB to deployment.
+  </div>
+
+  <!-- SKILLS -->
+  <section class="section">
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-label">Core Stack</div>
+        <div class="skill-tags">
+          <span class="tag primary">Laravel</span>
+          <span class="tag primary">Vue.js</span>
+          <span class="tag primary">Next.js</span>
+          <span class="tag">PHP</span>
+          <span class="tag">React</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-label">Data & Search</div>
+        <div class="skill-tags">
+          <span class="tag">MySQL</span>
+          <span class="tag">Oracle SQL</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">ElasticSearch</span>
+          <span class="tag">Solr</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-label">Infra & Tools</div>
+        <div class="skill-tags">
+          <span class="tag">AWS EC2/VPC</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Cloudflare R2</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Git</span>
+        </div>
+      </div>
+      <div class="skill-group" style="margin-top:10px">
+        <div class="skill-label">AI & APIs</div>
+        <div class="skill-tags">
+          <span class="tag">OpenAI GPT API</span>
+          <span class="tag">Prompt Engineering</span>
+          <span class="tag">TTS (MeloTTS)</span>
+        </div>
+      </div>
+      <div class="skill-group" style="margin-top:10px">
+        <div class="skill-label">Workflow</div>
+        <div class="skill-tags">
+          <span class="tag">Jira</span>
+          <span class="tag">Figma</span>
+          <span class="tag">Notion</span>
+          <span class="tag">Agile/Scrum</span>
+        </div>
+      </div>
+      <div class="skill-group" style="margin-top:10px">
+        <div class="skill-label">Languages</div>
+        <div class="skill-tags">
+          <span class="tag">Korean (native)</span>
+          <span class="tag">English (working)</span>
+          <span class="tag">Portuguese (basic)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section">
+    <div class="section-title">Experience</div>
+
+    <div class="job">
+      <div class="job-header">
+        <div class="job-title">Full-Stack Developer</div>
+        <div class="job-date">Sep 2023 — Apr 2026</div>
+      </div>
+      <div class="job-company">
+        GeminiSoft <span>· Broadcasting tech company, South Korea · ~50 employees</span>
+      </div>
+      <div class="job-stack">
+        <span class="tag">Laravel</span>
+        <span class="tag">Vue.js</span>
+        <span class="tag">Oracle SQL</span>
+        <span class="tag">Solr</span>
+        <span class="tag">ElasticSearch</span>
+        <span class="tag">Linux</span>
+      </div>
+      <div class="achievements">
+
+        <div class="achievement">
+          <div class="achievement-icon">🎯</div>
+          <div class="achievement-content">
+            <div class="achievement-title">Broadcast CMS — UX Overhaul</div>
+            <div class="achievement-detail">
+              Internal CMS was generating ~98 monthly support complaints. Conducted user feedback sessions, rebuilt key UI flows, and built automated features — reducing complaints by <span class="metric">68% (98 → 32/month)</span>.
+            </div>
+          </div>
+        </div>
+
+        <div class="achievement">
+          <div class="achievement-icon">⚡</div>
+          <div class="achievement-content">
+            <div class="achievement-title">Statistics Dashboard — Query Optimization</div>
+            <div class="achievement-detail">
+              Dashboard queries were timing out at 28s+ as data grew. Eliminated nested subqueries, introduced a dedicated statistics table with daily scheduled aggregation — response time dropped to <span class="metric">under 1 second</span> with no degradation at 30% YoY data growth.
+            </div>
+          </div>
+        </div>
+
+        <div class="achievement">
+          <div class="achievement-icon">🤖</div>
+          <div class="achievement-content">
+            <div class="achievement-title">Speech-To-Text Automation Pipeline</div>
+            <div class="achievement-detail">
+              STT vendor had no API. Reverse-engineered automation using the solution's watch function + Linux crontab scheduler — now auto-generates subtitles for <span class="metric">~600 content items/day</span>, replacing entirely manual work.
+            </div>
+          </div>
+        </div>
+
+        <div class="achievement">
+          <div class="achievement-icon">📚</div>
+          <div class="achievement-content">
+            <div class="achievement-title">Developer Onboarding Documentation</div>
+            <div class="achievement-detail">
+              New-hire environment setup across 4 projects was taking 7 days. Built a comprehensive internal wiki and setup guide — onboarding time reduced by <span class="metric">85% (7 days → 1 day)</span>.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section">
+    <div class="section-title">Personal Projects</div>
+
+    <div class="project">
+      <div class="project-live">● Live & Active</div>
+      <div class="project-header">
+        <div class="project-name">Lasagna Korea — Korean Learning Platform for Portuguese Speakers</div>
+        <a class="project-url" href="http://lasagnakorea.co.kr" target="_blank">lasagnakorea.co.kr ↗</a>
+      </div>
+      <div class="project-subtitle">Solo Full-Stack · Oct 2025 – Present</div>
+      <div class="job-stack">
+        <span class="tag">Next.js</span>
+        <span class="tag">SQLite</span>
+        <span class="tag">Tailwind</span>
+        <span class="tag">OpenAI GPT API</span>
+        <span class="tag">MeloTTS</span>
+        <span class="tag">Cloudflare R2</span>
+        <span class="tag">AWS EC2/VPC</span>
+      </div>
+      <ul class="project-bullets">
+        <li>Built an AI content pipeline: GPT generates culture-themed Korean books from structured prompts; MeloTTS converts them to natural-sounding audio — fully automated prompt-to-published-book flow</li>
+        <li>Integrated Cloudflare R2 for audio storage; diagnosed and resolved a bandwidth cost spike via image optimization — reduced serving costs to near zero</li>
+        <li>Self-hosted production server on home hardware — handling deployment, networking, and maintenance independently</li>
+        <li>Acquired ~10 real paying users through community outreach; actively iterating on feedback</li>
+      </ul>
+      <div class="takeaway">Takeaway: First product with a real feedback loop. Learned that shipping without a distribution strategy gets zero traction — fixed that with proactive community seeding.</div>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <div class="project-name">AI Dispute Mediation SaaS</div>
+      </div>
+      <div class="project-subtitle">Solo Full-Stack · Jun 2024 – May 2025</div>
+      <div class="job-stack">
+        <span class="tag">Next.js</span>
+        <span class="tag">SQLite</span>
+        <span class="tag">Tailwind</span>
+        <span class="tag">OpenAI GPT API</span>
+        <span class="tag">Payple PG</span>
+        <span class="tag">AWS EC2/VPC</span>
+      </div>
+      <ul class="project-bullets">
+        <li>Engineered personalized GPT prompt flows — injecting user context (age, MBTI, marital status) to produce consistent, context-aware mediation verdicts across diverse conflict narratives</li>
+        <li>Architected full payment flow covering success/failure/cancellation states; independently navigated PG contract and compliance review from scratch</li>
+        <li>Deployed with encrypted DB schema for personal and payment data on AWS EC2/VPC</li>
+      </ul>
+      <div class="takeaway">Takeaway: A technically complete product with zero marketing gets zero users. This shaped how I now think about product building — distribution first.</div>
+    </div>
+
+  </section>
+
+</div>
+</body>
+</html>
